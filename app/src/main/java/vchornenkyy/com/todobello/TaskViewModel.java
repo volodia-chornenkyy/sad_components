@@ -13,8 +13,7 @@ public class TaskViewModel extends ViewModel {
     private final MutableLiveData<String> task = new MutableLiveData<>();
     private final LiveData<List<String>> tasks;
 
-    public TaskViewModel() {
-        TaskRepository taskRepository = new TaskRepository();
+    public TaskViewModel(@NonNull TaskRepository taskRepository) {
         tasks = Transformations.switchMap(task, input -> {
             MutableLiveData<List<String>> tasks = taskRepository.getTasks();
             taskRepository.addTask(input);

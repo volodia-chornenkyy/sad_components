@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TasksAdapter tasksAdapter;
 
+    private ViewModelFactory viewModelFactory = new ViewModelFactory();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         listTasks.setLayoutManager(new LinearLayoutManager(this));
         listTasks.setAdapter(tasksAdapter);
 
-        TaskViewModel taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
+        TaskViewModel taskViewModel = ViewModelProviders.of(this, viewModelFactory).get(TaskViewModel.class);
         taskViewModel.getTasks().observe(this, tasks -> tasksAdapter.update(tasks));
     }
 }

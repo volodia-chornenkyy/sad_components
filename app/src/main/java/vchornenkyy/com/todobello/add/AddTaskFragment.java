@@ -11,21 +11,23 @@ import android.widget.EditText;
 
 import vchornenkyy.com.todobello.R;
 import vchornenkyy.com.todobello.TaskViewModel;
+import vchornenkyy.com.todobello.ViewModelFactory;
 
 public class AddTaskFragment extends Fragment {
 
     private TaskViewModel taskViewModel;
+
+    private ViewModelFactory viewModelFactory = new ViewModelFactory();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_add_task, container, false);
 
-        taskViewModel = ViewModelProviders.of(getActivity()).get(TaskViewModel.class);
+        taskViewModel = ViewModelProviders.of(getActivity(), viewModelFactory).get(TaskViewModel.class);
 
-        view.findViewById(R.id.btnAdd).setOnClickListener(v -> {
-            taskViewModel.addNewTask(((EditText) view.findViewById(R.id.etTask)).getText().toString());
-        });
+        view.findViewById(R.id.btnAdd).setOnClickListener(v ->
+                taskViewModel.addNewTask(((EditText) view.findViewById(R.id.etTask)).getText().toString()));
 
         return view;
     }
