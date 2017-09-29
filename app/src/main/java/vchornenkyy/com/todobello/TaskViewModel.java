@@ -16,9 +16,12 @@ public class TaskViewModel extends ViewModel {
     public TaskViewModel(@NonNull TaskRepository taskRepository) {
         tasks = Transformations.switchMap(task, input -> {
             MutableLiveData<List<String>> tasks = taskRepository.getTasks();
-            taskRepository.addTask(input);
+            if (input != null && input.length() > 0) {
+                taskRepository.addTask(input);
+            }
             return tasks;
         });
+        task.setValue("");
     }
 
     public void addNewTask(@NonNull String taskName) {

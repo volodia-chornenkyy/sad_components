@@ -34,6 +34,7 @@ dependencies {
     implementation "android.arch.lifecycle:common-java8:1.0.0-beta1"
 
     testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:2.10.0"
 
     testImplementation "android.arch.core:core-testing:1.0.0-beta1"
 
