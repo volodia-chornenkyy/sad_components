@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import vchornenkyy.com.todobello.task.TaskRepository;
+import vchornenkyy.com.todobello.task.TaskViewModel;
+
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;

@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vchornenkyy.com.todobello.R;
+import vchornenkyy.com.todobello.task.Task;
 
 public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.Holder> {
 
-    private List<String> data = new ArrayList<>(0);
+    private List<Task> data = new ArrayList<>(0);
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -32,7 +33,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.Holder> {
     }
 
     // TODO: 28.09.2017 change to Room or at least DiffUtil
-    public void update(@NonNull List<String> data) {
+    public void update(@NonNull List<Task> data) {
         this.data.clear();
         this.data.addAll(data);
         notifyDataSetChanged();
@@ -47,8 +48,8 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.Holder> {
             tvTaskName = itemView.findViewById(R.id.tvTaskName);
         }
 
-        public void bind(String task) {
-            tvTaskName.setText(task);
+        public void bind(Task task) {
+            tvTaskName.setText(task.toString());
         }
     }
 }

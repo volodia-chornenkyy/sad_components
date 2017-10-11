@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import vchornenkyy.com.todobello.R;
-import vchornenkyy.com.todobello.TaskViewModel;
+import vchornenkyy.com.todobello.task.TaskViewModel;
 import vchornenkyy.com.todobello.ViewModelInjector;
 
 public class AddTaskFragment extends Fragment {

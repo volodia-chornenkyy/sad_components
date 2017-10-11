@@ -1,4 +1,4 @@
-package vchornenkyy.com.todobello;
+package vchornenkyy.com.todobello.task;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -11,15 +11,14 @@ import java.util.List;
 public class TaskViewModel extends ViewModel {
 
     private final MutableLiveData<String> task = new MutableLiveData<>();
-    private final LiveData<List<String>> tasks;
+    private final LiveData<List<Task>> tasks;
 
     public TaskViewModel(@NonNull TaskRepository taskRepository) {
         tasks = Transformations.switchMap(task, input -> {
-            MutableLiveData<List<String>> tasks = taskRepository.getTasks();
             if (input != null && input.length() > 0) {
                 taskRepository.addTask(input);
             }
-            return tasks;
+            return taskRepository.getTasks();
         });
         task.setValue("");
     }
@@ -28,7 +27,7 @@ public class TaskViewModel extends ViewModel {
         task.setValue(taskName);
     }
 
-    public LiveData<List<String>> getTasks() {
+    public LiveData<List<Task>> getTasks() {
         return tasks;
     }
 }
