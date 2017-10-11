@@ -1,6 +1,5 @@
 package vchornenkyy.com.todobello;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,12 +12,13 @@ public class MainActivity extends AppCompatActivity {
 
     private TasksAdapter tasksAdapter;
 
-    private ViewModelFactory viewModelFactory = new ViewModelFactory();
+    private TaskViewModel taskViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        inject();
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -31,8 +31,10 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView listTasks = findViewById(R.id.listTasks);
         listTasks.setLayoutManager(new LinearLayoutManager(this));
         listTasks.setAdapter(tasksAdapter);
-
-        TaskViewModel taskViewModel = ViewModelProviders.of(this, viewModelFactory).get(TaskViewModel.class);
         taskViewModel.getTasks().observe(this, tasks -> tasksAdapter.update(tasks));
+    }
+
+    private void inject() {
+        taskViewModel = ViewModelInjector.get(this, TaskViewModel.class);
     }
 }
