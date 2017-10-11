@@ -1,9 +1,12 @@
 package vchornenkyy.com.todobello;
 
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import vchornenkyy.com.todobello.add.AddTaskFragment;
 import vchornenkyy.com.todobello.list.TasksAdapter;
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         listTasks.setLayoutManager(new LinearLayoutManager(this));
         listTasks.setAdapter(tasksAdapter);
         taskViewModel.getTasks().observe(this, tasks -> tasksAdapter.update(tasks));
+        taskViewModel.getLoading().observe(this, loading ->
+                findViewById(R.id.progressBar).setVisibility(loading ? View.VISIBLE : View.GONE));
     }
 
     private void inject() {
